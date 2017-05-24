@@ -10,6 +10,8 @@ import com.google. gson.annotations.SerializedName;
 
 
 public class Item {
+
+    //JSON Response Variables
     @SerializedName("name")
     private String name;
 
@@ -22,7 +24,7 @@ public class Item {
     @SerializedName("default_branch")
     private String branch;
 
-
+    //Getters and Setters
     public String getName() {
         return name;
     }
