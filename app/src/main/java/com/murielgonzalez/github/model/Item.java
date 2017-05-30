@@ -24,6 +24,9 @@ public class Item {
     @SerializedName("default_branch")
     private String branch;
 
+    @SerializedName("owner")
+    private RepoOwner owner;
+
     //Getters and Setters
     public String getName() {
         return name;
@@ -39,6 +42,16 @@ public class Item {
 
     public String getBranch() {
         return branch;
+    }
+
+    public String getAvatarUrl() {
+
+        if (owner != null) {
+            return owner.getAvatar_url();
+        }
+
+        return null;
+
     }
 
     public Item(String name, String repoUrl, String description, String branch) {

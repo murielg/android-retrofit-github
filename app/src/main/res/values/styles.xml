@@ -8,4 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="FontType">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/defaultFontColor</item>
+        <item name="android:textSize">@dimen/font_size</item>
+    </style>
+
+    <style name="SmallGrayFontType">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/small_font_size</item>
+    </style>
+
+
 </resources>

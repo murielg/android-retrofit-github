@@ -1,5 +1,6 @@
 package com.murielgonzalez.github.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,12 +24,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ItemsAdapter.ItemClickListener {
     private static String TAG = MainActivity.class.getCanonicalName();
     public static final String ROOT_URL = "https://api.github.com/";
-    OkHttpClient client = new OkHttpClient();
-    private RecyclerView RecyclerView;
-    private LinearLayoutManager LinearLayoutManager;
+    OkHttpClient client;
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button  getDataBtn = (Button) findViewById(R.id.getDataBtn);
         getDataBtn.setOnClickListener(this);
 
-        RecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        LinearLayoutManager = new LinearLayoutManager(this);
-        RecyclerView.setLayoutManager(LinearLayoutManager);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        client = new OkHttpClient();
     }
 
 
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 try {
                     List<Item> Data = response.body();
-                    RecyclerView.setAdapter(new ItemsAdapter(Data, R.layout.item_layout, getApplicationContext()));
+                    mRecyclerView.setAdapter(new ItemsAdapter(Data, R.layout.item_layout, getApplicationContext(), MainActivity.this));
                     Log.d("list", Data.toString());
 
                 } catch (Exception e) {
@@ -94,9 +96,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
-
-
+    @Override
+    public void onClickItem(Item post, int position) {
+        Log.d(TAG, "onClickItem");
+    }
 }
 
